@@ -1,38 +1,118 @@
+<!-- 
+	该页面为主页面
+	1、难度调节
+	2、跳转至游戏页面并传参
+-->
 <template>
-	<view>
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
+	<view class="container">
+		<view class="game-title">
+			<text class="title-text">Neon Flow</text>
+		</view>
+		
+		<view class="game-options">
+			<view class="option-item">
+				<text class="option-label">难度选择：</text>
+				<picker mode="selector" :value="difficultyIndex" :range="difficultyOptions" @change="onDifficultyChange">
+					<view class="picker">{{difficultyOptions[difficultyIndex]}}</view>
+				</picker>
+			</view>
+		</view>
+		
+		<view class="start-btn-container">
+			<button class="start-btn" @tap="startGame">开始游戏</button>
 		</view>
 	</view>
 </template>
 
-<script>
+<script lang="uts">
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				difficultyIndex: 1,
+				difficultyOptions: ['简单', '普通', '困难']
 			}
 		},
 		onLoad() {
-
+			
 		},
 		methods: {
-
+			onDifficultyChange(e : any) {
+				this.difficultyIndex = parseInt(e.detail.value)
+			},
+			startGame() {
+				const difficulty = this.difficultyOptions[this.difficultyIndex]
+				const url = '/pages/game/game?difficulty=' + encodeURIComponent(difficulty)
+				console.log('Navigate to:', url)
+				uni.navigateTo({
+					url: url
+				})
+			}
 		}
 	}
 </script>
 
 <style>
-	.logo {
-		height: 100px;
-		width: 100px;
-		margin: 100px auto 25px auto;
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 40px 20px;
+		background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+		min-height: 100vh;
 	}
-
-	.title {
-		font-size: 18px;
-		color: #8f8f94;
-    text-align: center;
+	
+	.game-title {
+		margin-top: 60px;
+		margin-bottom: 80px;
+	}
+	
+	.title-text {
+		font-size: 48px;
+		font-weight: bold;
+		color: #00d4ff;
+	}
+	
+	.game-options {
+		width: 100%;
+		max-width: 350px;
+		margin-bottom: 60px;
+	}
+	
+	.option-item {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-bottom: 30px;
+		background: rgba(255, 255, 255, 0.1);
+		padding: 15px 20px;
+		border-radius: 12px;
+	}
+	
+	.option-label {
+		color: #ffffff;
+		font-size: 16px;
+		width: 100px;
+	}
+	
+	.picker {
+		color: #00d4ff;
+		font-size: 16px;
+		flex: 1;
+	}
+	
+	.start-btn-container {
+		width: 100%;
+		max-width: 350px;
+	}
+	
+	.start-btn {
+		background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+		color: #ffffff;
+		font-size: 20px;
+		font-weight: bold;
+		border: none;
+		border-radius: 50px;
+		padding: 15px;
+		width: 100%;
 	}
 </style>

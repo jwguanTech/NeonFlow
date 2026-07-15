@@ -1,0 +1,136 @@
+<template>
+	<view class="game-container">
+		<view class="game-header">
+			<view class="player-info">
+				<text class="info-label">难度：</text>
+				<text class="info-value">{{ difficulty }}</text>
+			</view>
+			<view class="player-info">
+				<text class="info-label">分数：</text>
+				<text class="info-value">{{ score }}</text>
+			</view>
+		</view>
+		
+		<view class="game-area">
+			<view class="game-content">
+				<text class="game-text">游戏进行中...</text>
+				<text class="score-display">{{ score }}</text>
+			</view>
+		</view>
+		
+		<view class="game-controls">
+			<button class="control-btn score-btn" @tap="addScore">得分 +10</button>
+			<button class="control-btn back-btn" @tap="goBack">返回主页</button>
+		</view>
+	</view>
+</template>
+
+<script lang="uts">
+	export default {
+		data() {
+			return {
+				difficulty: '',
+				score: 0
+			}
+		},
+		onLoad(options : any) {
+			console.log('Game page loaded with options:', options)
+			if (options.difficulty) {
+				this.difficulty = decodeURIComponent(options.difficulty)
+			}
+		},
+		methods: {
+			addScore() {
+				this.score += 10
+			},
+			goBack() {
+				uni.navigateBack()
+			}
+		}
+	}
+</script>
+
+<style>
+	.game-container {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+	}
+	
+	.game-header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		padding: 20px 10px;
+		background: rgba(0, 0, 0, 0.3);
+	}
+	
+	.player-info {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.info-label {
+		color: #aaa;
+		font-size: 12px;
+		margin-bottom: 4px;
+	}
+	
+	.info-value {
+		color: #00d4ff;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	
+	.game-area {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.game-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.game-text {
+		color: #ffffff;
+		font-size: 20px;
+		margin-bottom: 30px;
+	}
+	
+	.score-display {
+		font-size: 80px;
+		font-weight: bold;
+		color: #00d4ff;
+	}
+	
+	.game-controls {
+		padding: 30px 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+	
+	.control-btn {
+		padding: 15px;
+		border-radius: 12px;
+		font-size: 18px;
+		font-weight: bold;
+		border: none;
+	}
+	
+	.score-btn {
+		background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+		color: #ffffff;
+	}
+	
+	.back-btn {
+		background: rgba(255, 255, 255, 0.2);
+		color: #ffffff;
+	}
+</style>

@@ -1,17 +1,27 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app x"
+				"navigationBarTitleText": "Neon Flow",
+				"navigationBarBackgroundColor": "#1a1a2e",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/game/game",
+			"style": {
+				"navigationBarTitleText": "游戏中",
+				"navigationBarBackgroundColor": "#0f0c29",
+				"navigationBarTextStyle": "white"
 			}
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app x",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "Neon Flow",
+		"navigationBarBackgroundColor": "#1a1a2e",
+		"backgroundColor": "#1a1a2e"
 	},
 	"uniIdRouter": {}
 }
